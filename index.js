@@ -7,15 +7,12 @@ const morgan = require("morgan");
 const app = express();
 dotenv.config();
 
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
+  console.log("Connected to MongoDB");
+});
 
-const port =8800
-console.log(port)
-const a = 2
-const b = 5;
-const result = b-a;
+const port = 8800;
 
-
-
-app.listen(port, ()=>{
-    console.log(`Backend server 💻️ is running 🏃 on port ${port}....`)
-})
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Backend server is running on port ${port}....`);
+});

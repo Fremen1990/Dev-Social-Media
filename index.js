@@ -27,4 +27,4 @@ app.listen(port, "0.0.0.0", () => {
   console.log(`Backend server is running on port ${port}....`);
 });
 
-//TODO 8:10 min Middleware and first request
+//TODO 18:50 min LOGIN and Register

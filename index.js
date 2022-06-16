@@ -9,9 +9,13 @@ const authRoute = require("./routes/auth");
 const app = express();
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
-  console.log("Connected to MongoDB");
-});
+mongoose.connect(
+  process.env.MONGO_URL,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("Connected to MongoDB!!!!!");
+  }
+);
 
 //middleware
 app.use(express.json());
@@ -26,5 +30,3 @@ const port = 8800;
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend server is running on port ${port}....`);
 });
-
-//TODO 18:50 min LOGIN and Register

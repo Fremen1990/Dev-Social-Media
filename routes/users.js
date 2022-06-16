@@ -1,11 +1,40 @@
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
-  res.send("Hej, this is from user routes");
-});
+// Update user
+router.put("/:id", async (req, res) => {
+  if (req.body.userId === req.params.id || req.user.isAdmin) {
+    if (req.body.password) {
+      try {
+        const salt = await bcrypt.genSalt(10);
+        req.body.password = await bcrypt.hash(req.body.password, salt);
+      } catch (err) {
+        return res.status(500).json(err);
+      }
+    }
 
-router.get("/man", (req, res) => {
-  res.send("Hej man!");
+    try {
+      const user = await User.findByIdAndUpdate(req.params.id, {
+        $set: req.body,
+      });
+      res.status(200).json("Account has been updated");
+    } catch (err) {
+      return res.status(500).json(err);
+    }
+  } else {
+    return res.status(403).json("You can update only your account user");
+  }
 });
+// Delete user
+// TODO CRUD DELETE 45:30
+
+// get one user
+
+// Follow a user
+
+// Unfollow a user
+
+// Get all users
 
 module.exports = router;

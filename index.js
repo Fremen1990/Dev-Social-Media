@@ -32,3 +32,6 @@ const port = 8800;
 app.listen(port, "0.0.0.0", () => {
   console.log(`Backend server is running on port ${port}....`);
 });
+
+// ADD TESTING
+// ADD ERROR HANDLING

@@ -1,6 +1,7 @@
 # Dev-Social-Media
 
 ## TODO:
+- [ ] Add "upload image" and "update image" functionality to load image to mongoDB
 - [ ] Unit Testing with Mocha - different branch
 - [ ] Integration testing with SuperTest - different branch
 - [ ] Testing coverage with Istanbul - different branch

@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const cors = require('cors');
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,8 @@ mongoose.connect(
     console.log("Connected to MongoDB!!!!!");
   }
 );
+
+app.use(cors({ origin: true }));
 
 //middleware
 app.use(express.json());

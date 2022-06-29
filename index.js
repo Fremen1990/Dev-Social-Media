@@ -21,6 +21,7 @@ mongoose.connect(
   }
 );
 
+// cors to connect to front-end
 app.use(cors({ origin: true }));
 
 // do not send GET request, just use static directory
@@ -37,16 +38,18 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
-
+    cb(
+      null,
+      file.originalname
+      // req.body.name // todo issue, req.body.name not received from client
+    );
     // TODO 02:11 file.originalname issue
   },
 });
-
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
-    return res.status(200).json("File uploded successfully");
+    return res.status(200).json("File uploaded successfully");
   } catch (error) {
     console.error(error);
   }

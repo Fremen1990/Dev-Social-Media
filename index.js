@@ -38,12 +38,7 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    cb(
-      null,
-      file.originalname
-      // req.body.name // todo issue, req.body.name not received from client
-    );
-    // TODO 02:11 file.originalname issue
+    cb(null, req.body.name);
   },
 });
 const upload = multer({ storage: storage });

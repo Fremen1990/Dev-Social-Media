@@ -6,10 +6,12 @@ const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
-const cors = require('cors');
+const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 
-const app = express();
 dotenv.config();
+const app = express();
 
 mongoose.connect(
   process.env.MONGO_URL,
@@ -21,11 +23,36 @@ mongoose.connect(
 
 app.use(cors({ origin: true }));
 
+// do not send GET request, just use static directory
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 //middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
+// upload files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+
+    // TODO 02:11 file.originalname issue
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    return res.status(200).json("File uploded successfully");
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+//routes
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);

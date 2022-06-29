@@ -12,6 +12,7 @@
 
 ## IMPROVEMENTS TODO:
 
+### - Implement AWS S3 for user images and post images
 ### - Refactoring to TypeScript
 ### -  Migration from REST to GraphQL
 ### - Login with passport.js (google, email, github etc)

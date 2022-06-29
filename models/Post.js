@@ -9,16 +9,15 @@ const PostSchema = new mongoose.Schema(
     title: {
       type: String,
       max: 32,
-      required: true,
     },
     desc: {
       type: String,
       max: 10000,
     },
     img: {
-        data: Buffer,
-        contentType: String,
-        // type: String,
+      data: Buffer,
+      contentType: String,
+      // type: String,
     },
     likes: {
       type: Array,

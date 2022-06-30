@@ -25,7 +25,7 @@ mongoose.connect(
 app.use(cors({ origin: true }));
 
 // do not send GET request, just use static directory
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use("/api/images", express.static(path.join(__dirname, "public/images")));
 
 //middleware
 app.use(express.json());
@@ -48,6 +48,11 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   } catch (error) {
     console.error(error);
   }
+});
+
+//welcome:)
+app.get("/api", async (req, res) => {
+  res.status(200).json({ message: "Welcome to my DevSocialMedia API!! :)" });
 });
 
 //routes
